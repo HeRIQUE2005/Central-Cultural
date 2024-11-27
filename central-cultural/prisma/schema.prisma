@@ -1,0 +1,49 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model CadastrarClientes {
+  id           String @id @default(uuid())
+  nome         String @unique
+  senha        String
+  celular      String
+  cpf          String
+  email        String
+  preferencias String
+
+  data_criacao   DateTime @default(now()) @db.Timestamptz()
+  data_alteracao DateTime @default(now()) @db.Timestamptz()
+
+  @@map("Cadastrar_Clientes")
+}
+
+model CadastrarNoticias {
+  id             String @id @default(uuid())
+  texto_noticias String
+
+  data_criacao   DateTime @default(now()) @db.Timestamptz()
+  data_alteracao DateTime @default(now()) @db.Timestamptz()
+
+  @@map("Cadastrar_Noticias")
+}
+
+model CadastrarCargo {
+  id   String @id @default(uuid())
+  nome String
+
+  data_criacao   DateTime @default(now()) @db.Timestamptz()
+  data_alteracao DateTime @default(now()) @db.Timestamptz()
+
+  @@map("Cadastrar_Cargo")
+}
